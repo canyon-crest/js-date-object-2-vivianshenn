@@ -77,7 +77,7 @@ document.getElementById("myDate").innerHTML = dateString;
 //          c) Display the elapsed time using .toFixed(3)
 //             in the element with ID "myTimer"
 let startTime = new Date().getTime();
-let timerID = setInterval(function() {
+let timerId = setInterval(function() {
     let currentTime = new Date().getTime();
     let elapsed = (currentTime - startTime) / 1000;
     document.getElementById("myTimer").innerHTML = elapsed.toFixed(3);
