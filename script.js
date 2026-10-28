@@ -29,7 +29,10 @@
 
 // STEP 5: Display the day name in the element with ID "warmUpDate"
 //         using document.getElementById("warmUpDate").innerHTML
-
+let now = new Date();
+let dayNumber = now.getDay()
+let days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+document.getElementById("warmUpDate").innerHTML = days[dayNumber];
 
 // ============================================
 //  PART 1: Current Date Display
@@ -50,7 +53,11 @@
 
 // STEP 10: Build the date string: month + "/" + day + "/" + year
 //          Display it in the element with ID "myDate"
-
+let month = now.getMonth() + 1;
+let day = now.getDate();
+let year = now.getFullYear();
+let dateString = month + "/" + day + "/" + year;
+document.getElementById("myDate").innerHTML = dateString;
 
 // ============================================
 //  PART 2: Elapsed Timer
@@ -69,6 +76,12 @@
 //          b) Calculate elapsed seconds: (currentTime - startTime) / 1000
 //          c) Display the elapsed time using .toFixed(3)
 //             in the element with ID "myTimer"
+let startTime = new Date().getTime();
+let timerID = setInterval(function() {
+    let currentTime = new Date().getTime();
+    let elapsed = (currentTime - startTime) / 1000;
+    document.getElementById("myTimer").innerHTML = elapsed.toFixed(3);
+}, 10);
 
 
 // ============================================
@@ -95,3 +108,21 @@
 //             - Start a new setInterval (same as STEP 12)
 //             - Change button innerHTML to "Stop"
 //             - Set running to true
+let running = true;
+document.getElementById("myBtn").addEventListener("click", function() {
+    if (running === true) {
+        clearInterval(timerId);
+        document.getElementById("myBtn").innerHTML = "Start";
+        running = false;
+    } else {
+        startTime = new Date().getTime();
+        document.getElementById("myTimer").innerHTML = "0.000";
+        timerId = setInterval(function() {
+            let currentTime = new Date().getTime();
+            let elapsed = (currentTime - startTime) / 1000;
+            document.getElementById("myTimer").innerHTML = elapsed.toFixed(3);
+        }, 10);
+        document.getElementById("myBtn").innerHTML = "Stop";
+        running = true;
+    }
+});
